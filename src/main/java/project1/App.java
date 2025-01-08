@@ -38,24 +38,40 @@ public class App
 
 
             ////////3
-            Movie movie1=new Movie("New movie",director);
+
+            Movie movie1 = new Movie("New movie task 3", director);
+            director.getMovies().add(movie1);
+            session.save(movie1);
+            System.out.println("task 3 added new movie");
+
+
 
 
             ////////4
             Director director1=new Director("new dir");
-            Movie movie2=new Movie("newset",director1);
-            director1.getMovies().add(movie2);
+
+            session.save(director1);
+
+            Movie movie2=new Movie("task 4 new mov",director1);
+            movie2.setDirector(director1);
 
             session.save(movie2);
+            System.out.println("new dir with new movie added task 4");
 
             ////////5
             Movie movie3= session.get(Movie.class,2);
             movie3.setDirector(director1);
+            System.out.println("task 5 changed movie 2 to new");
 
 
             /////6
             Director director2=session.get(Director.class,3);
+            Movie movie4=director2.getMovies().get(1);
             director2.getMovies().remove(1);
+            movie4.setDirector(null);
+
+
+            System.out.println(" task 6 remove film of the 3 rt dir");
 
             session.getTransaction().commit();
         }
